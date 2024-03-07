@@ -9,7 +9,7 @@ public class GoldCustomerDeposits
     public void MakingADespositIncreasesBalance(decimal amountToDeposit, decimal expected)
     {
         // Given
-        var account = new BankAccount();
+        var account = new GoldAccount();
         // Get Balance is a "Query" - we are asking it for something.
         var openingBalance = account.GetBalance();
 

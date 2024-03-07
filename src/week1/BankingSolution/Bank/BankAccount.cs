@@ -1,15 +1,12 @@
-﻿
+﻿namespace Bank;
 
 
-namespace Bank;
-
+public enum AccountType { Standard, Gold };
 public class BankAccount
 {
-    public BankAccount()
-    {
-    }
     private decimal _currentBalance = 5000m;
-    public void Deposit(decimal amountToDeposit)
+
+    public virtual void Deposit(decimal amountToDeposit)
     {
         GuardTransactionAmount(amountToDeposit);
         _currentBalance = _currentBalance + amountToDeposit;
