@@ -7,7 +7,7 @@ public class MakingDeposits
     [InlineData(100)]
     public void MakingADespositIncreasesBalance(decimal amountToDeposit)
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
 
         // WTCYWYH

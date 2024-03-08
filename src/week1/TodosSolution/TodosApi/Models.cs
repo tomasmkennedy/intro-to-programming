@@ -13,3 +13,10 @@ public record TodoCreateResponse
 }
 
 public enum TodoStatus { Incomplete, Complete }
+
+public record StatusResponse
+{
+    public DateTimeOffset CheckedAt { get; set; }
+    public string MessageProcessingHandler { get; set; } = string.Empty;
+    public string SupportTech { get; set; } = string.Empty;
+}

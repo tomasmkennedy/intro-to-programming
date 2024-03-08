@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IFormatDisplayInformation, AdvancedFormatters>();
+
 var connectionString = builder.Configuration.GetConnectionString("todos") ??
     throw new Exception("Can't start, need a connection string");
 
@@ -27,9 +29,15 @@ if (app.Environment.IsDevelopment())
 }
 
 // GET /status
-app.MapGet("/status", () =>
+app.MapGet("/status", ([FromServices] IFormatDisplayInformation utils) =>
 {
-    return Results.Ok();
+    var response = new StatusResponse
+    {
+        CheckedAt = DateTimeOffset.Now,
+        MessageProcessingHandler = "Looks Good",
+        SupportTech = utils.FormatName("Bob", "Smith")
+    };
+    return Results.Ok(response);
 });
 
 app.MapPost("/todos", async ([FromBody] TodoCreateRequest request,
