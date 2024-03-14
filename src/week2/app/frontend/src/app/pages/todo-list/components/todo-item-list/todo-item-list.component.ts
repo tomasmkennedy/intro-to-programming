@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { TodoListItem } from '../../models';
 import { NgClass } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { NgClass } from '@angular/common';
   imports: [NgClass],
   template: `
     <ul>
-      @for(item of list; track item.id) {
+      @for(item of list(); track item.id) {
       <li class="card bg-base-300 shadow-xl mb-4">
         <div class="card-body">
           <span [ngClass]="{ 'line-through': item.completed }">{{
@@ -38,9 +38,8 @@ import { NgClass } from '@angular/common';
   `,
 })
 export class TodoItemListComponent {
-
-  @Input({ required: true }) list: TodoListItem[] = [];
-
+  // @Input({ required: true }) list: TodoListItem[] = [];
+  list = input.required<TodoListItem[]>();
   markComplete(item: TodoListItem) {
     item.completed = true;
   }
