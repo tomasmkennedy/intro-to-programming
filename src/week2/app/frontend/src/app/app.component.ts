@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
-import { DemoComponent } from './components/demo/demo.component';
 import { RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { Store } from '@ngrx/store';
+import { ApplicationActions } from './state/actions';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   template: `
     <div class="container mx-auto">
       <app-page-header />
-      <app-nav-bar />
+      <nav>
+        <app-nav-bar />
+      </nav>
       <main>
         <router-outlet />
       </main>
@@ -20,5 +23,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   imports: [PageHeaderComponent, RouterOutlet, NavBarComponent],
 })
 export class AppComponent {
-  title = 'Demo Angular App';
+  constructor(store: Store) {
+    store.dispatch(ApplicationActions.applicationStarted());
+  }
 }

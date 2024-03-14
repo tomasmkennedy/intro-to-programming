@@ -14,30 +14,31 @@ import { NgClass } from '@angular/common';
           <span [ngClass]="{ 'line-through': item.completed }">{{
             item.description
           }}</span>
-          @if(item.completed === false) {
           <div class="card-actions justify-end">
+            @if(item.completed === false) {
             <button (click)="markComplete(item)" class="btn btn-sm btn-primary">
               X
             </button>
-          </div>
-          } @else {
-          <div class="card-actions justify-end">
+            } @else {
             <button
               (click)="markIncomplete(item)"
               class="btn btn-sm btn-accent"
             >
               +
             </button>
+            }
           </div>
-          }
         </div>
       </li>
       }
     </ul>
   `,
-  styles: ``,
+  styles: `
+ 
+  `,
 })
 export class TodoItemListComponent {
+
   @Input({ required: true }) list: TodoListItem[] = [];
 
   markComplete(item: TodoListItem) {

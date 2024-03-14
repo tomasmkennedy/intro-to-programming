@@ -32,7 +32,7 @@ export class TodoEntryComponent {
   });
 
   addItem() {
-    console.log(this.form.controls.description.value);
+    console.log(this.form.value);
     this.itemAdded.emit({
       description: this.form.controls.description.value ?? '',
     });

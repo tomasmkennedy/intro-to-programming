@@ -21,6 +21,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         [routerLinkActive]="['tab-active']"
         >Todo List</a
       >
+      <a
+        routerLink="/counter"
+        role="tab"
+        class="tab"
+        [routerLinkActive]="['tab-active']"
+        >Counter</a
+      >
     </div>
   `,
   styles: ``,

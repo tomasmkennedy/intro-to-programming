@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-demo',
-
   standalone: true,
-
   imports: [],
-
   template: `
     <p>
-      {{ counter }}
+      {{ counter() }}
     </p>
-
     <button (click)="doIt()" class="btn btn-primary">Increment</button>
   `,
-
   styles: ``,
 })
 export class DemoComponent {
-  counter = 0;
+  counter = signal(0);
 
   doIt() {
-    this.counter += 1;
+    this.counter.set(this.counter() + 1);
   }
 }

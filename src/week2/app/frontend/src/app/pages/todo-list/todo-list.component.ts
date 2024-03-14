@@ -8,7 +8,7 @@ import { TodoListItem } from './models';
   standalone: true,
   template: `
     <section>
-      <h2 class="text-2x1 font-bold">Your Todo List</h2>
+      <h2 class="text-2xl font-bold">Your Todo List</h2>
     </section>
     <div>
       <app-todo-entry (itemAdded)="addItem($event)" />
