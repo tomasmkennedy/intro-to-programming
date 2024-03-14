@@ -10,7 +10,8 @@ public class TodosController(TodosDataContext _context) : ControllerBase
     [HttpGet("/todos")]
     public async Task<ActionResult<GetTodoListResponse>> GetAllTodosAsync()
     {
-        var response = await _context.Todos
+        await Task.Delay(3000); // Don't do this.
+        var list = await _context.Todos
             .OrderBy(t => t.CreatedDate)
             .Select(t => new CreateTodoResponse
             {
@@ -19,7 +20,8 @@ public class TodosController(TodosDataContext _context) : ControllerBase
                 DueDate = t.DueDate,
                 Priority = t.Priority
             }).ToListAsync();
-        return Ok(new { list = response });
+        var response = new GetTodoListResponse { List = list };
+        return Ok(response);
     }
 
     [HttpPost("/todos")]

@@ -41,5 +41,5 @@ public record CreateTodoResponse
 
 public record GetTodoListResponse
 {
-    public IList<CreateTodoRequest>? List { get; set; }
+    public IList<CreateTodoResponse>? List { get; set; }
 }
