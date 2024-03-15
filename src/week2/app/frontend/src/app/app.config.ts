@@ -9,6 +9,7 @@ import { provideEffects } from '@ngrx/effects';
 import { CounterEffects } from './pages/counter/state/counter-effects';
 import { todosFeature } from './pages/todo-list/state';
 import { provideHttpClient } from '@angular/common/http';
+import { TodoEffects } from './pages/todo-list/state/todos-effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideState(counterFeature),
     provideState(todosFeature),
-    provideEffects([CounterEffects]),
+    provideEffects([CounterEffects, TodoEffects]),
     provideStoreDevtools(),
   ],
 };

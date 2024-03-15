@@ -5,13 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-page-header',
   standalone: true,
   imports: [RouterLink],
-  template: `
-    <header>
-      <h1 class="font-black text-3xl">Our Angular Application</h1>
-      <p>Just Learning Here</p>
-      <a routerLink="/prefs">⚙️</a>
-    </header>
-  `,
+  templateUrl: './page-header.component.html',
   styles: ``,
 })
 export class PageHeaderComponent {

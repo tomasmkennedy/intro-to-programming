@@ -1,27 +1,18 @@
-# Frontend
+# Stuff ToDo For our Todo App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+What else could we do here:
 
-## Development server
+- Make it so we can toggle an item back to incomplete (Challenge: Low.)
+- Make it so that when they add a Todo, it also allows them, optionally, to add a due date and a priority. (Challenge: Medium)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  - In our list, display the due date and the priority.
 
-## Code scaffolding
+- Make it so that our list can be:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  - Filtered - have a set of buttons (think "set count by") that says "Show All" | "Show Completed" | "Show Incomplete"
 
-## Build
+    - When they click the button, the list is filtered.
+    - Do not make any API calls for this.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  - Search - put a textbox above the list that when they type in it, it filters the list to items with whatever is in
+    the textbox only. Challenge: Medium +

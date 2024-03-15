@@ -43,7 +43,7 @@ export class CounterComponent {
   constructor(private store: Store) {}
   current = this.store.selectSignal(counterFeature.selectCurrent);
 
-  isEven = computed(() => this.current() % 2 == 0);
+  isEven = this.store.selectSignal(counterFeature.isEven);
   nextAdd = this.store.selectSignal(counterFeature.nextValueIfIncrement);
   nextDec = this.store.selectSignal(counterFeature.nextValueIfDecrement);
   increment() {

@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TodoEvents } from '../../state/actions';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo-entry',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
   template: `
     <form [formGroup]="form" (ngSubmit)="addItem()">
       <div>
@@ -27,11 +28,12 @@ import { TodoEvents } from '../../state/actions';
         @if(description.invalid && (description.touched || description.dirty)) {
         <div>
           @if(description.getError('required')) {
-          <p>Please provide a description</p>
+          <p>You Have to Provide a Description</p>
           } @if(description.getError('minlength')) {
-          <p>Please enter at least three characters</p>
+
+          <p>A todo that short isn't worth doing!</p>
           } @if(description.getError('maxlength')) {
-          <p>Please enter no more than 124 characters</p>
+          <p>Too long, are you crazy</p>
           }
         </div>
         }
@@ -50,13 +52,13 @@ export class TodoEntryComponent {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.maxLength(124),
         Validators.minLength(3),
+        Validators.maxLength(124),
       ],
     }),
   });
 
-  private store = inject(Store);
+  private store = inject(Store); //  this or constructor(private store:Store)
 
   get description() {
     return this.form.controls.description;
@@ -70,5 +72,6 @@ export class TodoEntryComponent {
         })
       );
     }
+    this.form.reset();
   }
 }

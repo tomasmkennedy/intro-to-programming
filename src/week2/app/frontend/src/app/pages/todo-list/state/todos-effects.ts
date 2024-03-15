@@ -1,15 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs';
+import { map, merge, mergeMap, switchMap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApplicationActions } from '../../../state/actions';
-import { TodoCommands, TodoDocuments } from './actions';
+import { TodoCommands, TodoDocuments, TodoEvents } from './actions';
 import { TodoEntity } from '../types';
 @Injectable()
 export class TodoEffects {
   // When the applications started, what does that mean for the todos feature?
   readonly baseUrl = environment.apiUrl;
+
+  markCompleted$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoEvents.todoItemMarkedComplete),
+      mergeMap(({ payload }) =>
+        this.httpClient.post(this.baseUrl + '/completed-todos', payload).pipe(
+          map(() => ({ ...payload, completed: true })),
+          map((payload) => TodoDocuments.todo({ payload }))
+        )
+      )
+    )
+  );
+
+  markIncompleted$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoEvents.todoItemMarkedIncomplete),
+      mergeMap(({ payload }) =>
+        this.httpClient.post(this.baseUrl + '/completed-todos', payload).pipe(
+          map(() => ({ ...payload, completed: false })),
+          map((payload) => TodoDocuments.todo({ payload }))
+        )
+      )
+    )
+  );
+
+  addTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoEvents.todoItemAdded),
+      mergeMap((a) =>
+        this.httpClient
+          .post<TodoEntity>(this.baseUrl + '/todos', { description: a.payload })
+          .pipe(map((payload) => TodoDocuments.todo({ payload })))
+      )
+    )
+  );
+
   onStartup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ApplicationActions.applicationStarted),

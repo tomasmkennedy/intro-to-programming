@@ -37,6 +37,7 @@ public record CreateTodoResponse
     public string Description { get; set; } = string.Empty;
     public DateTimeOffset? DueDate { get; set; }
     public TodoPriority? Priority { get; set; }
+    public bool Completed { get; set; }
 }
 
 public record GetTodoListResponse

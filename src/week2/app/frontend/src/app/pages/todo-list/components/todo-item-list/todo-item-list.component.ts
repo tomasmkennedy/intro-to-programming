@@ -1,6 +1,8 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import { TodoListItem } from '../../models';
 import { NgClass } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { TodoEvents } from '../../state/actions';
 
 @Component({
   selector: 'app-todo-item-list',
@@ -59,10 +61,13 @@ import { NgClass } from '@angular/common';
 export class TodoItemListComponent {
   // @Input({ required: true }) list: TodoListItem[] = [];
   list = input.required<TodoListItem[]>();
+  private store = inject(Store);
+
   markComplete(item: TodoListItem) {
-    item.completed = true;
+    this.store.dispatch(TodoEvents.todoItemMarkedComplete({ payload: item }));
   }
   markIncomplete(item: TodoListItem) {
-    item.completed = false;
+    console.log('incomplete');
+    this.store.dispatch(TodoEvents.todoItemMarkedIncomplete({ payload: item }));
   }
 }

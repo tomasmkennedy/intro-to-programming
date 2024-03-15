@@ -2,5 +2,6 @@ export type TodoEntity = {
   id: string;
   description: string;
   dueDate?: string;
-  priority?: 'Ligh' | 'Low';
+  priority?: 'High' | 'Low';
+  completed: boolean;
 };

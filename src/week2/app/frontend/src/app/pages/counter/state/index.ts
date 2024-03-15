@@ -1,4 +1,10 @@
-import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import {
+  createFeature,
+  createReducer,
+  createSelector,
+  on,
+  select,
+} from '@ngrx/store';
 import { CountByValues, CounterActions } from './actions';
 
 export interface CounterState {
